@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun install *)",
+      "Bash(bun run *)",
+      "Bash(bun add *)",
+      "Bash(magick --version)",
+      "Bash(node generate-icon.js)",
+      "Bash(node generate-icon.cjs)",
+      "Bash(ipconfig)",
+      "Bash(findstr \"IPv4\")",
+      "Bash(taskkill /PID 23364 /F)",
+      "Bash(taskkill //PID 23364 //F)",
+      "Bash(taskkill //PID 11948 //F)"
+    ]
+  }
+}

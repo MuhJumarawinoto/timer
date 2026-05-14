@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Barlow', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+@theme {
+  --font-rajdhani: 'Rajdhani', 'sans-serif';
+  --font-barlow: 'Barlow', 'sans-serif';
+
+  --color-ow-orange: #F5A623;
+  --color-ow-orange-dark: #E0941A;
+
+  --radius-4xl: 2rem;
+}
+
