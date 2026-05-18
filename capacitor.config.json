@@ -4,7 +4,9 @@
   "webDir": ".output/public",
   "bundledWebRuntime": false,
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "url": "https://waktu-rental.velotek.co.id/",
+    "cleartext": true
   },
   "android": {
     "buildOptions": {

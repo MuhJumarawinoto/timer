@@ -4,9 +4,8 @@ on:
   push:
     branches: [ main, master ]
     paths:
-      - 'app/**'
-      - 'public/**'
       - 'capacitor.config.json'
+      - 'android/**'
       - '.github/workflows/build-apk.yml'
   pull_request:
     branches: [ main, master ]
@@ -36,9 +35,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install
-
-      - name: Build static site
-        run: bun run generate
 
       - name: Setup Capacitor
         run: |
@@ -88,6 +84,11 @@ jobs:
         run: |
           echo "## 🎉 APK Build Success!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📦 Download:" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 App Info:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Name:** Timer PS" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL:** https://waktu-rental.velotek.co.id/" >> $GITHUB_STEP_SUMMARY
+          echo "- **Package:** com.timerps.app" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📱 Download:" >> $GITHUB_STEP_SUMMARY
           echo "- Debug APK: Check artifacts below" >> $GITHUB_STEP_SUMMARY
           echo "- Release APK: Check artifacts below" >> $GITHUB_STEP_SUMMARY
