@@ -1,0 +1,93 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'app/**'
+      - 'public/**'
+      - 'capacitor.config.json'
+      - '.github/workflows/build-apk.yml'
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build static site
+        run: bun run generate
+
+      - name: Setup Capacitor
+        run: |
+          bunx cap sync android
+          echo "Capacitor sync completed"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
+
+      - name: Build APK (Debug)
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: timer-ps-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Build APK (Release)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Upload Release APK
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: timer-ps-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
+
+      - name: Get APK size
+        run: |
+          echo "Debug APK size:"
+          ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+          if [ -f android/app/build/outputs/apk/release/app-release.apk ]; then
+            echo "Release APK size:"
+            ls -lh android/app/build/outputs/apk/release/app-release.apk
+          fi
+
+      - name: Create Release Summary
+        if: success()
+        run: |
+          echo "## 🎉 APK Build Success!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Download:" >> $GITHUB_STEP_SUMMARY
+          echo "- Debug APK: Check artifacts below" >> $GITHUB_STEP_SUMMARY
+          echo "- Release APK: Check artifacts below" >> $GITHUB_STEP_SUMMARY

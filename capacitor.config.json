@@ -1,0 +1,36 @@
+{
+  "appId": "com.timerps.app",
+  "appName": "Timer PS",
+  "webDir": ".output/public",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": "",
+      "keystoreAlias": ""
+    }
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "launchAutoHide": true,
+      "backgroundColor": "#F5A623",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false,
+      "androidSpinnerStyle": "large",
+      "spinnerColor": "#FFFFFF"
+    },
+    "StatusBar": {
+      "style": "DARK"
+    },
+    "App": {
+      "overrideUserAgent": "TimerPS/1.0",
+      "allowNavigation": [
+        "*"
+      ]
+    }
+  }
+}

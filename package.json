@@ -7,15 +7,26 @@
     "build": "bun run nuxt build",
     "generate": "bun run nuxt generate",
     "preview": "bun run nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "cap:sync": "bunx cap sync",
+    "cap:open": "bunx cap open android",
+    "apk:debug": "build-apk.bat",
+    "apk:release": "build-apk-release.bat"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "mysql2": "^3.22.3",
     "nuxt": "^4.4.2",
     "vue": "^3.5.33",
     "vue-router": "^5.0.6"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
+    "@capacitor/core": "^8.3.4",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@vite-pwa/nuxt": "^1.1.1"
+    "@types/bcryptjs": "^3.0.0",
+    "@vite-pwa/nuxt": "^1.1.1",
+    "nuxt-icons": "^4.0.0"
   }
 }
