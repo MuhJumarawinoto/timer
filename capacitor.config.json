@@ -28,6 +28,11 @@
     "StatusBar": {
       "style": "DARK"
     },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#F5A623",
+      "sound": "beep.wav"
+    },
     "App": {
       "overrideUserAgent": "TimerPS/1.0",
       "allowNavigation": [
